@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{{{ url_for('static', filename='style/style.css') }}}}"
+    />
+
+    <title>Get-it</title>
+  </head>
+  <body>
+    <div id="topbar">
+      <img
+        class="img_get_it"
+        src="{{{{ url_for('static', filename='img/logo-getit.png') }}}}"
+      />
+      <p>Como o Post-it, mas com outro verbo</p>
+    </div>
+    <div class="content">
+      <div class="new_note">
+        <form action="/submit" method="POST">
+          <label for="titulo">Título</label>
+          <input id="titulo" type="text" name="titulo" />
+          <label for="detalhes">Detalhes</label>
+          <input id="detalhes" name="detalhes" />
+          <input type="submit" />
+        </form>
+        <ul class="notes">
+          {notes}
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
