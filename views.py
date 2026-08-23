@@ -7,13 +7,21 @@ def index():
 
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
+        cursor.execute(
+            """
+            CREATE TABLE IF NOT EXISTS note (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                content TEXT NOT NULL
+            )
+        """
+        )
 
-        cursor.execute("SELECT id, title, content FROM notes")
-        dados_do_banco = cursor.fetchall() 
-
+        cursor.execute("SELECT title, content FROM note")
+        dados_do_banco = cursor.fetchall()
 
     notes_li = [
-        note_template.format(title=note[1], content=note[2])
+        note_template.format(title=note[0], content=note[1])
         for note in dados_do_banco
     ]
     notes = "\n".join(notes_li)
@@ -22,11 +30,22 @@ def index():
 
 
 def submit(titulo, detalhes):
+
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
 
         cursor.execute(
-            "INSERT INTO notes (title, content) VALUES (?, ?)",
+            """
+            CREATE TABLE IF NOT EXISTS note (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                content TEXT NOT NULL
+            )
+        """
+        )
+
+        cursor.execute(
+            "INSERT INTO note (title, content) VALUES (?, ?)",
             (titulo, detalhes),
         )
         connection.commit()
