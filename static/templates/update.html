@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{{{ url_for('static', filename='style/style.css') }}}}"
+    />
+    <title>Editar Nota - Get-it</title>
+  </head>
+  <body>
+    <div id="topbar">
+      <img
+        class="img_get_it"
+        src="{{{{ url_for('static', filename='img/logo-getit.png') }}}}"
+      />
+      <p>Como o Post-it, mas com outro verbo</p>
+    </div>
+
+    <div class="content">
+      <div class="new_note">
+        <form action="/update/{id}" method="POST" class="update-form">
+          <div class="form-group">
+            <label for="titulo">Título</label>
+            <input id="titulo" type="text" name="titulo" value="{title}" required />
+          </div>
+
+          <div class="form-group">
+            <label for="detalhes">Detalhes</label>
+            <input id="detalhes" name="detalhes" value="{content}" required />
+          </div>
+
+          <div class="button-group">
+            <input type="submit" value="Salvar" />
+            <a href="/" class="cancel-btn">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

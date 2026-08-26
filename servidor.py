@@ -21,5 +21,15 @@ def submit_form():
     views.submit(titulo, detalhes)
     return redirect('/')
 
+@app.route('/update/<int:id>', methods=["POST","GET"])
+def edit_note (id):
+    if request.method == 'POST':
+        titulo = request.form.get("titulo")
+        detalhes = request.form.get("detalhes")
+        views.update(id, titulo, detalhes)
+        return redirect("/")
+
+    return render_template_string(views.edit(id))
+
 if __name__ == '__main__':
     app.run(debug=True)
