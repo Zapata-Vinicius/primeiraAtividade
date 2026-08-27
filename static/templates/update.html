@@ -7,7 +7,7 @@
       rel="stylesheet"
       href="{{{{ url_for('static', filename='style/style.css') }}}}"
     />
-    <title>Editar Nota - Get-it</title>
+    <title>Editar Nota</title>
   </head>
   <body>
     <div id="topbar">
@@ -20,10 +20,18 @@
 
     <div class="content">
       <div class="new_note">
-        <form action="/update/{id}" method="POST" class="update-form">
+        <form action="/update" method="POST" class="update-form">
+          <input type="hidden" name="id" value="{id}" />
+
           <div class="form-group">
             <label for="titulo">Título</label>
-            <input id="titulo" type="text" name="titulo" value="{title}" required />
+            <input
+              id="titulo"
+              type="text"
+              name="titulo"
+              value="{title}"
+              required
+            />
           </div>
 
           <div class="form-group">
@@ -32,7 +40,7 @@
           </div>
 
           <div class="button-group">
-            <input type="submit" value="Salvar" />
+            <button type="submit">Salvar</button>
             <a href="/" class="cancel-btn">Cancelar</a>
           </div>
         </form>

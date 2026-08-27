@@ -1,5 +1,5 @@
 import sqlite3
-from utils import load_template
+from utils import load_template, get_note_by_id
 
 
 def index():
@@ -50,25 +50,17 @@ def submit(titulo, detalhes):
         )
         connection.commit()
 
-def edit (id):
-    with sqlite3.connect("banco.db") as connection:
-        cursor = connection.cursor()
+def edit(id):
+    note = get_note_by_id(id)
 
-        cursor.execute(
-            "SELECT id, title, content FROM note WHERE id = ?",
-            (id, )
-        )   
+    if note:
+        return load_template("update.html").format(
+            id=note["id"],
+            title=note["title"],
+            content=note["content"]
+        )
 
-        note = cursor.fetchone()
-
-        if note:
-            return load_template("update.html").format(
-                id=note[0],
-                title=note[1],
-                content=note[2]
-            )
-
-        return "Nota não encontrada", 404
+    return "Nota não encontrada", 404
 
 def update (id, titulo, detalhes):
     with sqlite3.connect("banco.db") as connection:
