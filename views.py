@@ -30,10 +30,8 @@ def index():
 
 
 def submit(titulo, detalhes):
-
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
-
         cursor.execute(
             """
             CREATE TABLE IF NOT EXISTS note (
@@ -43,7 +41,6 @@ def submit(titulo, detalhes):
             )
         """
         )
-
         cursor.execute(
             "INSERT INTO note (title, content) VALUES (?, ?)",
             (titulo, detalhes),
@@ -62,11 +59,12 @@ def edit(id):
 
     return "Nota não encontrada", 404
 
-def update (id, titulo, detalhes):
+
+def update(id, titulo, detalhes):
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
         cursor.execute(
             "UPDATE note SET title = ?, content = ? WHERE id = ?",
-            (titulo,detalhes,id)
-        )   
+            (titulo, detalhes, id),
+        )
         connection.commit()

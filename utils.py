@@ -1,5 +1,8 @@
 import json 
 import sqlite3
+from collections import namedtuple
+
+Note = namedtuple("Note", ["id", "title", "content"])
 
 def load_template (template_name):
     with open(f'static/templates/{template_name}', 'r') as arquivo:
