@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -21,7 +25,6 @@ body {
   gap: 15px;
   align-items: center;
   padding: 10px 20px;
-  box-sizing: border-box;
 }
 
 .img_get_it {
@@ -83,7 +86,6 @@ ol {
   border-radius: 15px;
   margin: 20px 0;
   padding: 20px;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -103,27 +105,60 @@ ol {
   word-break: break-word;
 }
 
-.edit-btn, .cancel-btn {
-  display: inline-block;
+/* CONTAINER DOS BOTÕES */
+.button-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.button-group form {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+/* ESTILO DOS BOTÕES */
+.edit-btn,
+.cancel-btn,
+.delete-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 6px 16px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  line-height: 1;
   background-color: #333;
   color: white;
   text-decoration: none;
   border-radius: 4px;
-  font-size: 14px;
-  transition: background-color 0.2s;
-}
-
-.edit-btn:hover, .cancel-btn:hover {
-  background-color: #111;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .cancel-btn {
   background-color: #888;
 }
 
-.button-group {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+.delete-btn {
+  background-color: #d9534f;
+}
+
+.edit-btn:hover,
+.cancel-btn:hover {
+  background-color: #111;
+}
+
+.delete-btn:hover {
+  background-color: #c9302c;
+}
+
+.edit-btn:active,
+.cancel-btn:active,
+.delete-btn:active {
+  transform: scale(0.97);
 }

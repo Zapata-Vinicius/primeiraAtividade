@@ -34,5 +34,10 @@ def update_note():
     views.update(id, titulo, detalhes)
     return redirect('/')
 
+@app.route("/delete/<int:id>", methods=["POST", "GET"])
+def delete_noteid(id):
+    views.delete(id)
+    return redirect("/")
+
 if __name__ == '__main__':
     app.run(debug=True)

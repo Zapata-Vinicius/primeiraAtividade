@@ -47,6 +47,15 @@ def submit(titulo, detalhes):
         )
         connection.commit()
 
+def delete(id):
+    note = get_note_by_id(id)
+
+    with sqlite3.connect("banco.db") as connection:
+        cursor = connection.cursor()
+        cursor.execute("DELETE FROM note WHERE id = ?", (id, ))
+
+        connection.commit()
+
 def edit(id):
     note = get_note_by_id(id)
 
