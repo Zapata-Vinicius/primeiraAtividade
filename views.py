@@ -7,11 +7,16 @@ def index():
 
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
-        cursor.execute("SELECT id, title, content, is_favorite FROM note ORDER_BY is_favorite DESC, id ASC")
+        cursor.execute("SELECT id, title, content, is_favorite FROM note ORDER BY is_favorite DESC, id ASC")
         dados_do_banco = cursor.fetchall()
 
     notes_li = [
-        note_template.format(id=note[0], title=note[1], content=note[2], favorite_icon="★" if note[3] else "☆")
+        note_template.format(
+            id=note[0],
+            title=note[1],
+            content=note[2],
+            favorite_icon="★" if note[3] else "☆"
+        )
         for note in dados_do_banco
     ]
     notes = "\n".join(notes_li)
