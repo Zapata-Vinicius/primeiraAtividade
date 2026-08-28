@@ -1,16 +1,18 @@
-<ol class="card">
+<ol class="card {favorite_class}">
   <h3 id="note_title">{title}</h3>
   <p id="note_content">{content}</p>
   <div class="button-group">
-    <a href="update/{id}" class="edit-btn" name="edit_button">Edit</a>
-    <form action="/delete/{id}">
+    <a href="/update/{id}" class="edit-btn" name="edit_button">Edit</a>
+
+    <form action="/delete/{id}" method="POST">
       <button type="submit" name="delete_button" class="delete-btn">
         Delete
       </button>
     </form>
-    <form action="/favorite/{id}">
+
+    <form action="/favorite/{id}" method="POST">
       <button type="submit" name="favorite_button" class="favorite-btn">
-        Favorite
+        {favorite_icon} Favorite
       </button>
     </form>
   </div>
