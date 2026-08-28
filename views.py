@@ -7,13 +7,7 @@ def index():
 
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
-        cursor.execute(
-            """ 
-            SELECT id, title, content, is_favorite FROM 
-        """
-        )
-
-        cursor.execute("SELECT id, title, content FROM note")
+        cursor.execute("SELECT id, title, content, is_favorite FROM note")
         dados_do_banco = cursor.fetchall()
 
     notes_li = [
@@ -33,7 +27,8 @@ def submit(titulo, detalhes):
             CREATE TABLE IF NOT EXISTS note (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT NOT NULL,
-                content TEXT NOT NULL
+                content TEXT NOT NULL,
+                is_favorite INTEGER DEFAULT 0
             )
         """
         )
@@ -43,14 +38,15 @@ def submit(titulo, detalhes):
         )
         connection.commit()
 
+
 def delete(id):
     note = get_note_by_id(id)
 
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
-        cursor.execute("DELETE FROM note WHERE id = ?", (id, ))
-
+        cursor.execute("DELETE FROM note WHERE id = ?", (id,))
         connection.commit()
+
 
 def edit(id):
     note = get_note_by_id(id)
@@ -80,5 +76,5 @@ def favorite(id):
 
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
-        cursor.execute("UPDATE note SET is_favorite = not is_favorite WHERE id = ?", (id, ))
+        cursor.execute("UPDATE note SET is_favorite = NOT is_favorite WHERE id = ?", (id,))
         connection.commit()
