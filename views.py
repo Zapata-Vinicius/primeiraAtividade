@@ -7,20 +7,27 @@ def index():
 
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
-        cursor.execute("SELECT id, title, content, is_favorite FROM note ORDER BY is_favorite DESC, id ASC")
+        cursor.execute(
+            "SELECT id, title, content, is_favorite FROM note ORDER BY is_favorite DESC, id DESC"
+        )
         dados_do_banco = cursor.fetchall()
 
-    notes_li = [
-        note_template.format(
+    notes_li = []
+    for note in dados_do_banco:
+        is_fav = note[3]
+        favorite_class = "favorite-card" if is_fav else ""
+        favorite_icon = "★" if is_fav else "☆"
+
+        formatted_note = note_template.format(
             id=note[0],
             title=note[1],
             content=note[2],
-            favorite_icon="★" if note[3] else "☆"
+            favorite_class=favorite_class,
+            favorite_icon=favorite_icon
         )
-        for note in dados_do_banco
-    ]
-    notes = "\n".join(notes_li)
+        notes_li.append(formatted_note)
 
+    notes = "\n".join(notes_li)
     return load_template("index.html").format(notes=notes)
 
 
@@ -38,15 +45,13 @@ def submit(titulo, detalhes):
         """
         )
         cursor.execute(
-            "INSERT INTO note (title, content) VALUES (?, ?)",
+            "INSERT INTO note (title, content, is_favorite) VALUES (?, ?, 0)",
             (titulo, detalhes),
         )
         connection.commit()
 
 
 def delete(id):
-    note = get_note_by_id(id)
-
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
         cursor.execute("DELETE FROM note WHERE id = ?", (id,))
@@ -58,9 +63,7 @@ def edit(id):
 
     if note:
         return load_template("update.html").format(
-            id=note["id"],
-            title=note["title"],
-            content=note["content"]
+            id=note["id"], title=note["title"], content=note["content"]
         )
 
     return "Nota não encontrada", 404
@@ -77,9 +80,10 @@ def update(id, titulo, detalhes):
 
 
 def favorite(id):
-    note = get_note_by_id(id)
-
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
-        cursor.execute("UPDATE note SET is_favorite = NOT is_favorite WHERE id = ?", (id,))
+        cursor.execute(
+            "UPDATE note SET is_favorite = NOT is_favorite WHERE id = ?",
+            (id,),
+        )
         connection.commit()
