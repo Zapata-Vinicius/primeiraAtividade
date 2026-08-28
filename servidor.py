@@ -39,5 +39,11 @@ def delete_noteid(id):
     views.delete(id)
     return redirect("/")
 
+@app.route("/favorite/<int:id>", methods=["POST","GET"])
+def favorite_note(id):
+    views.favorite(id)
+    return redirect("/")
+
+
 if __name__ == '__main__':
     app.run(debug=True)

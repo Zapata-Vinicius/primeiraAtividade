@@ -1,12 +1,16 @@
-<ol>
+<ol class="{card_class}">
   <h3 id="note_title">{title}</h3>
   <p id="note_content">{content}</p>
+
   <div class="button-group">
-    <a href="update/{id}" class="edit-btn" name="edit_button">Edit</a>
-    <form action="/delete/{id}">
-      <button type="submit" name="delete_button" class="delete-btn">
-        Delete
-      </button>
+    <a href="/update/{id}" name="edit_button" class="edit-btn">Editar</a>
+
+    <form action="/delete/{id}" method="POST">
+      <button type="submit" name="delete_button" class="delete-btn">Excluir</button>
+    </form>
+
+    <form action="/favorite/{id}" method="POST">
+      <button type="submit" name="favorite_button" class="favorite-btn">Favoritar</button>
     </form>
   </div>
 </ol>

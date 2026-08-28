@@ -81,7 +81,7 @@ body {
 ol {
   width: 500px;
   min-height: 250px;
-  background-color: yellow;
+  background-color: #ffff00;
   border: 1px solid #777;
   border-radius: 15px;
   margin: 20px 0;
@@ -91,6 +91,15 @@ ol {
   align-items: center;
   justify-content: space-between;
   list-style: none;
+  transition: all 0.3s ease;
+}
+
+ol.favorite-card {
+  background-color: #ffe600;
+  border: 2px solid #b89a00;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px) scale(1.02); 
+  z-index: 2;
 }
 
 #note_title {
@@ -123,7 +132,8 @@ ol {
 /* ESTILO DOS BOTÕES */
 .edit-btn,
 .cancel-btn,
-.delete-btn {
+.delete-btn,
+.favorite-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -137,7 +147,9 @@ ol {
   border-radius: 4px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
 }
 
 .cancel-btn {
@@ -146,6 +158,15 @@ ol {
 
 .delete-btn {
   background-color: #d9534f;
+}
+
+.favorite-btn {
+  background-color: blue;
+  color: white;
+}
+
+.favorite-btn:hover {
+  background-color: rgb(41, 29, 145);
 }
 
 .edit-btn:hover,
@@ -159,6 +180,7 @@ ol {
 
 .edit-btn:active,
 .cancel-btn:active,
-.delete-btn:active {
+.delete-btn:active,
+.favorite-btn:active {
   transform: scale(0.97);
 }
