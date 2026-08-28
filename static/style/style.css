@@ -78,10 +78,10 @@ body {
   gap: 10px;
 }
 
-ol {
+.card {
   width: 500px;
   min-height: 250px;
-  background-color: #ffff00;
+  background-color: yellow;
   border: 1px solid #777;
   border-radius: 15px;
   margin: 20px 0;
@@ -94,12 +94,11 @@ ol {
   transition: all 0.3s ease;
 }
 
-ol.favorite-card {
-  background-color: #ffe600;
+.card.favorite-card {
+  background-color: #e6c619;
   border: 2px solid #b89a00;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-  transform: translateY(-4px) scale(1.02); 
-  z-index: 2;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
 }
 
 #note_title {
@@ -114,7 +113,6 @@ ol.favorite-card {
   word-break: break-word;
 }
 
-/* CONTAINER DOS BOTÕES */
 .button-group {
   display: flex;
   align-items: center;
@@ -129,7 +127,6 @@ ol.favorite-card {
   padding: 0;
 }
 
-/* ESTILO DOS BOTÕES */
 .edit-btn,
 .cancel-btn,
 .delete-btn,
@@ -147,9 +144,7 @@ ol.favorite-card {
   border-radius: 4px;
   border: none;
   cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    transform 0.1s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .cancel-btn {
@@ -161,12 +156,7 @@ ol.favorite-card {
 }
 
 .favorite-btn {
-  background-color: blue;
-  color: white;
-}
-
-.favorite-btn:hover {
-  background-color: rgb(41, 29, 145);
+  background-color: #f0ad4e;
 }
 
 .edit-btn:hover,
@@ -176,6 +166,10 @@ ol.favorite-card {
 
 .delete-btn:hover {
   background-color: #c9302c;
+}
+
+.favorite-btn:hover {
+  background-color: #ec971f;
 }
 
 .edit-btn:active,
