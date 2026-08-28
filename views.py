@@ -8,8 +8,12 @@ def index():
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
         cursor.execute(
-            """ 
-            SELECT id, title, content, is_favorite FROM 
+            """
+            CREATE TABLE IF NOT EXISTS note (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                content TEXT NOT NULL
+            )
         """
         )
 
@@ -80,5 +84,8 @@ def favorite(id):
 
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
-        cursor.execute("UPDATE note SET is_favorite = not is_favorite WHERE id = ?", (id, ))
+        cursor.execute(""""
+            UPDATE note SET is_favorite = not is_favorite WHERE id = ?",
+        """)
+
         connection.commit()
