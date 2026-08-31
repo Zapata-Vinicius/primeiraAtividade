@@ -80,10 +80,12 @@ def update(id, titulo, detalhes):
 
 
 def favorite(id):
-    with sqlite3.connect("banco.db") as connection:
-        cursor = connection.cursor()
-        cursor.execute(
-            "UPDATE note SET is_favorite = NOT is_favorite WHERE id = ?",
-            (id,),
-        )
-        connection.commit()
+    note = get_note_by_id(id)
+    if note:
+        with sqlite3.connect("banco.db") as connection:
+            cursor = connection.cursor()
+            cursor.execute(
+                "UPDATE note SET is_favorite = CASE WHEN is_favorite = 1 THEN 0 ELSE 1 END WHERE id = ?",
+                (id,),
+            )
+            connection.commit()
