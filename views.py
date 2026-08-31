@@ -8,7 +8,7 @@ def index():
     with sqlite3.connect("banco.db") as connection:
         cursor = connection.cursor()
         cursor.execute(
-            "SELECT id, title, content, is_favorite FROM note ORDER BY is_favorite DESC, id DESC"
+            "SELECT id, title, content, is_favorite FROM note ORDER BY is_favorite DESC, id ASC"
         )
         dados_do_banco = cursor.fetchall()
 
